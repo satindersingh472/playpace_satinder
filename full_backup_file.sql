@@ -16,6 +16,56 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `chat_team`
+--
+
+DROP TABLE IF EXISTS `chat_team`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chat_team` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `team_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `chat_FK` (`team_id`),
+  CONSTRAINT `chat_FK` FOREIGN KEY (`team_id`) REFERENCES `team_profile` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chat_team`
+--
+
+LOCK TABLES `chat_team` WRITE;
+/*!40000 ALTER TABLE `chat_team` DISABLE KEYS */;
+/*!40000 ALTER TABLE `chat_team` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `chat_user`
+--
+
+DROP TABLE IF EXISTS `chat_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chat_user` (
+  `id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `chat_user_FK` (`user_id`),
+  CONSTRAINT `chat_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chat_user`
+--
+
+LOCK TABLES `chat_user` WRITE;
+/*!40000 ALTER TABLE `chat_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `chat_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `formats`
 --
 
@@ -37,6 +87,60 @@ INSERT INTO `formats` VALUES
 ('+1 (123)-456-7890'),
 ('+1 (123)-456-7890');
 /*!40000 ALTER TABLE `formats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `messages_group`
+--
+
+DROP TABLE IF EXISTS `messages_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `messages_group` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `chat_team_id` int(10) unsigned NOT NULL,
+  `message_content` mediumtext COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `messages_group_FK` (`chat_team_id`),
+  CONSTRAINT `messages_group_FK` FOREIGN KEY (`chat_team_id`) REFERENCES `chat_team` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `messages_group`
+--
+
+LOCK TABLES `messages_group` WRITE;
+/*!40000 ALTER TABLE `messages_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `messages_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `messages_user`
+--
+
+DROP TABLE IF EXISTS `messages_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `messages_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `chat_user_id` int(10) unsigned NOT NULL,
+  `message_content` mediumtext COLLATE utf8mb4_bin NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `messages_user_each` (`chat_user_id`),
+  CONSTRAINT `messages_user_each` FOREIGN KEY (`chat_user_id`) REFERENCES `chat_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `messages_user`
+--
+
+LOCK TABLES `messages_user` WRITE;
+/*!40000 ALTER TABLE `messages_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `messages_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -184,4 +288,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-28 23:39:54
+-- Dump completed on 2022-11-29  1:00:32
