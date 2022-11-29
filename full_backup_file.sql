@@ -58,6 +58,7 @@ CREATE TABLE `team_profile` (
   `salt` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `sport_type` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `gender_type` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
+  `province` varchar(2) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -69,6 +70,82 @@ CREATE TABLE `team_profile` (
 LOCK TABLES `team_profile` WRITE;
 /*!40000 ALTER TABLE `team_profile` DISABLE KEYS */;
 /*!40000 ALTER TABLE `team_profile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_role`
+--
+
+DROP TABLE IF EXISTS `user_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_role` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_role`
+--
+
+LOCK TABLES `user_role` WRITE;
+/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_team`
+--
+
+DROP TABLE IF EXISTS `user_team`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_team` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `team_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_team_team_key` (`team_id`),
+  KEY `user_team_user_key` (`user_id`),
+  KEY `user_team_role_key` (`role_id`),
+  CONSTRAINT `user_team_role_key` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_team_team_key` FOREIGN KEY (`team_id`) REFERENCES `team_profile` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_team_user_key` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_team`
+--
+
+LOCK TABLES `user_team` WRITE;
+/*!40000 ALTER TABLE `user_team` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_team` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -107,4 +184,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-28 14:52:54
+-- Dump completed on 2022-11-28 23:39:54
