@@ -41,31 +41,6 @@ LOCK TABLES `chat_team` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `chat_user`
---
-
-DROP TABLE IF EXISTS `chat_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `chat_user` (
-  `id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `chat_user_FK` (`user_id`),
-  CONSTRAINT `chat_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `chat_user`
---
-
-LOCK TABLES `chat_user` WRITE;
-/*!40000 ALTER TABLE `chat_user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `chat_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `formats`
 --
 
@@ -87,6 +62,28 @@ INSERT INTO `formats` VALUES
 ('+1 (123)-456-7890'),
 ('+1 (123)-456-7890');
 /*!40000 ALTER TABLE `formats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `message_user`
+--
+
+DROP TABLE IF EXISTS `message_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `message_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `message_user`
+--
+
+LOCK TABLES `message_user` WRITE;
+/*!40000 ALTER TABLE `message_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `message_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -114,33 +111,6 @@ CREATE TABLE `messages_group` (
 LOCK TABLES `messages_group` WRITE;
 /*!40000 ALTER TABLE `messages_group` DISABLE KEYS */;
 /*!40000 ALTER TABLE `messages_group` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `messages_user`
---
-
-DROP TABLE IF EXISTS `messages_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `messages_user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `chat_user_id` int(10) unsigned NOT NULL,
-  `message_content` mediumtext COLLATE utf8mb4_bin NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`),
-  KEY `messages_user_each` (`chat_user_id`),
-  CONSTRAINT `messages_user_each` FOREIGN KEY (`chat_user_id`) REFERENCES `chat_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `messages_user`
---
-
-LOCK TABLES `messages_user` WRITE;
-/*!40000 ALTER TABLE `messages_user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `messages_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -288,4 +258,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-29  1:00:32
+-- Dump completed on 2022-11-29 21:06:22
