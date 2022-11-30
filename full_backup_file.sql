@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.8.3-MariaDB, for osx10.17 (x86_64)
+-- MariaDB dump 10.19  Distrib 10.6.11-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: playpace
 -- ------------------------------------------------------
--- Server version	10.8.3-MariaDB
+-- Server version	10.6.11-MariaDB-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `formats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `formats` (
-  `phone` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL
+  `phone` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -58,9 +58,7 @@ CREATE TABLE `formats` (
 
 LOCK TABLES `formats` WRITE;
 /*!40000 ALTER TABLE `formats` DISABLE KEYS */;
-INSERT INTO `formats` VALUES
-('+1 (123)-456-7890'),
-('+1 (123)-456-7890');
+INSERT INTO `formats` VALUES ('+1 (123)-456-7890'),('+1 (123)-456-7890');
 /*!40000 ALTER TABLE `formats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +71,15 @@ DROP TABLE IF EXISTS `message_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `message_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
+  `message_content` mediumtext NOT NULL,
+  `reciever` int(10) unsigned NOT NULL,
+  `sender` int(10) unsigned NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `message_user_FK` (`reciever`),
+  KEY `message_user_FK_1` (`sender`),
+  CONSTRAINT `message_user_FK` FOREIGN KEY (`reciever`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `message_user_FK_1` FOREIGN KEY (`sender`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -97,7 +103,7 @@ CREATE TABLE `messages_group` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `chat_team_id` int(10) unsigned NOT NULL,
-  `message_content` mediumtext COLLATE utf8mb4_bin NOT NULL,
+  `message_content` mediumtext NOT NULL,
   PRIMARY KEY (`id`),
   KEY `messages_group_FK` (`chat_team_id`),
   CONSTRAINT `messages_group_FK` FOREIGN KEY (`chat_team_id`) REFERENCES `chat_team` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -122,17 +128,17 @@ DROP TABLE IF EXISTS `team_profile`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `team_profile` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `team_name` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `city` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `phone` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `email` varchar(300) COLLATE utf8mb4_bin NOT NULL,
+  `team_name` varchar(100) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `email` varchar(300) NOT NULL,
   `athlete_min_age` smallint(5) unsigned NOT NULL,
   `athlete_max_age` smallint(5) unsigned NOT NULL,
-  `password` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `salt` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `sport_type` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `gender_type` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
-  `province` varchar(2) COLLATE utf8mb4_bin NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `salt` varchar(100) NOT NULL,
+  `sport_type` varchar(100) NOT NULL,
+  `gender_type` varchar(10) DEFAULT NULL,
+  `province` varchar(2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -177,7 +183,7 @@ DROP TABLE IF EXISTS `user_role`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_role` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `role_name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -258,4 +264,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-29 21:06:22
+-- Dump completed on 2022-11-29 22:45:27
