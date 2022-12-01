@@ -120,6 +120,27 @@ LOCK TABLES `messages_group` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `practice_table`
+--
+
+DROP TABLE IF EXISTS `practice_table`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `practice_table` (
+  `id` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `practice_table`
+--
+
+LOCK TABLES `practice_table` WRITE;
+/*!40000 ALTER TABLE `practice_table` DISABLE KEYS */;
+/*!40000 ALTER TABLE `practice_table` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `team_profile`
 --
 
@@ -264,4 +285,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-29 22:45:27
+-- Dump completed on 2022-12-01 11:43:04
