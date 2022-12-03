@@ -286,3 +286,14 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-12-01 11:43:04
+drop table if exists `practice_to_push`;
+create table `practice_to_push` (
+`id` int(10) unsigned not null auto_increment,
+primary key (`id`)
+
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+lock tables (`practice_to_push`) write;
+unlock tables;
+
+
+
