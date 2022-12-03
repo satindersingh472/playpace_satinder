@@ -141,6 +141,29 @@ LOCK TABLES `practice_table` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `practice_to_push`
+--
+
+DROP TABLE IF EXISTS `practice_to_push`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `practice_to_push` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `practice_to_push`
+--
+
+LOCK TABLES `practice_to_push` WRITE;
+/*!40000 ALTER TABLE `practice_to_push` DISABLE KEYS */;
+INSERT INTO `practice_to_push` VALUES (1);
+/*!40000 ALTER TABLE `practice_to_push` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `team_profile`
 --
 
@@ -285,25 +308,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-01 11:43:04 
---
--- table structure for table `practice_to_push`
---
-
-
-
-
-
-drop table if exists `practice_to_push`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-create table `practice_to_push` (
-`id` int(10) unsigned not null auto_increment,
-primary key (`id`)
-
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-
-
-
+-- Dump completed on 2022-12-03  8:55:43
