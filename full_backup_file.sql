@@ -285,15 +285,25 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-01 11:43:04
+-- Dump completed on 2022-12-01 11:43:04 
+--
+-- table structure for table `practice_to_push`
+--
+
+
+
+
+
 drop table if exists `practice_to_push`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 create table `practice_to_push` (
 `id` int(10) unsigned not null auto_increment,
 primary key (`id`)
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-lock tables (`practice_to_push`) write;
-unlock tables;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 
 
 
